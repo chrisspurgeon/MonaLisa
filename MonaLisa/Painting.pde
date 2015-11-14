@@ -16,8 +16,11 @@ class Painting {
     for (int i = 0; i < len; i++) {
       c = color(random(255), random(255), random(255));
       img.pixels[i] = c;
+      if (i == 100) {
+        println(red(c));
+      }
     }
-    updatePixels();
+    img.updatePixels();
   }
   
   void save(String path) {
@@ -45,6 +48,7 @@ class Painting {
     color baseImageColor;
     color imageColor;
     baseImage.loadPixels();
+    img.loadPixels();
     if (baseImage.pixels.length == img.pixels.length) {
       for (int i = 0; i < baseImage.pixels.length; i++) {
         baseImageColor = baseImage.pixels[i];
@@ -58,5 +62,14 @@ class Painting {
   }
   
   void mutate(int count) {
+    img.loadPixels();
+    color c;
+    int offset;
+    for (int i = 1; i <= count; i++) {
+      offset = floor(random(img.pixels.length + 1));
+      c = color(int(random(256)), int(random(256)), int(random(256)));
+      img.pixels[offset] = c;
+    }
+    img.updatePixels();
   }
 }
