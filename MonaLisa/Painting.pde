@@ -1,11 +1,13 @@
 class Painting {
   
   PImage img;
+  int id;
   int counter = 0;
   long difference = 0;
 
-  Painting(int w, int h) {
+  Painting(int w, int h, int idNumber) {
    img = createImage(w,h,RGB); 
+   id = idNumber;
   }
   
   
@@ -16,9 +18,6 @@ class Painting {
     for (int i = 0; i < len; i++) {
       c = color(random(255), random(255), random(255));
       img.pixels[i] = c;
-      if (i == 100) {
-        println(red(c));
-      }
     }
     img.updatePixels();
   }
@@ -43,14 +42,14 @@ class Painting {
     counter = 0;
   }
   
-  long calculateDiffence(PImage baseImage) {
+  long calculateDifference(PImage baseImage) {
     long total = 0;
     color baseImageColor;
     color imageColor;
-    baseImage.loadPixels();
+//    baseImage.loadPixels();
     img.loadPixels();
-    if (baseImage.pixels.length == img.pixels.length) {
-      for (int i = 0; i < baseImage.pixels.length; i++) {
+    if (baseImage.pixels.length >= img.pixels.length) {
+      for (int i = 0; i < img.pixels.length; i++) {
         baseImageColor = baseImage.pixels[i];
         imageColor = img.pixels[i];
         total = total + abs(int(red(baseImageColor)) - int(red(imageColor)));        
@@ -66,7 +65,8 @@ class Painting {
     color c;
     int offset;
     for (int i = 1; i <= count; i++) {
-      offset = floor(random(img.pixels.length + 1));
+      offset = floor(random(img.pixels.length));
+      //println(offset);
       c = color(int(random(256)), int(random(256)), int(random(256)));
       img.pixels[offset] = c;
     }
