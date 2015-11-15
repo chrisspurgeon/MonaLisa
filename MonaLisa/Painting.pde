@@ -22,6 +22,15 @@ class Painting {
     img.updatePixels();
   }
   
+  void colorImage(color c) {
+    img.loadPixels();
+    int len = img.pixels.length;
+    for (int i = 0; i < len; i++) {
+      img.pixels[i] = c;
+    }
+    img.updatePixels();
+  }
+  
   void save(String path) {
     img.save(path);
   }
@@ -64,11 +73,13 @@ class Painting {
     img.loadPixels();
     color c;
     int offset;
+    println("New image!");
     for (int i = 1; i <= count; i++) {
       offset = floor(random(img.pixels.length));
       //println(offset);
       c = color(int(random(256)), int(random(256)), int(random(256)));
       img.pixels[offset] = c;
+      println("changing pixel " + offset);
     }
     img.updatePixels();
   }

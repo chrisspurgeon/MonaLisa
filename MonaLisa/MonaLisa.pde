@@ -1,26 +1,29 @@
 Painting[] variations;
-int populationSize = 500;
+int populationSize = 5000;
 int width = 100;
 int height = 100;
 PImage MonaLisa;
 long thisImageError;
 long smallestError;
 int generation = 0;
-int mutationRate = 2;
+int mutationRate = 5;
 int bestVariation = 0;
+color initialColor;
 
 void setup() {
   size(800,800);
   MonaLisa = loadImage("../Mona_Lisa_ORIG.jpg");
   MonaLisa.loadPixels();
   image(MonaLisa, 0,0);
+  initialColor = color(255, 255, 255);
   
 
   variations = new Painting[populationSize];
   
   for (int i = 0; i < populationSize; i++) {
     variations[i] = new Painting(width, height, i);
-    variations[i].createRandomImage();
+    //variations[i].createRandomImage();
+    variations[i].colorImage(initialColor);
     println("Creating variation #" + i);
   }
     
