@@ -55,7 +55,6 @@ class Painting {
     long total = 0;
     color baseImageColor;
     color imageColor;
-//    baseImage.loadPixels();
     img.loadPixels();
     if (baseImage.pixels.length >= img.pixels.length) {
       for (int i = 0; i < img.pixels.length; i++) {
@@ -76,10 +75,8 @@ class Painting {
     //println("New image!");
     for (int i = 1; i <= count; i++) {
       offset = floor(random(img.pixels.length));
-      //println(offset);
       c = color(int(random(256)), int(random(256)), int(random(256)));
       img.pixels[offset] = c;
-      //println("changing pixel " + offset);
     }
     img.updatePixels();
   }
