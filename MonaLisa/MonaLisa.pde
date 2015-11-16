@@ -1,19 +1,19 @@
 Painting[] variations;
-int populationSize = 200;
-int width = 500;
-int height = 500;
+int populationSize = 500;
+int width = 200;
+int height = 200;
 PImage MonaLisa;
 PImage teststartImage;
 long thisImageError;
 long smallestError;
 int generation = 0;
-int mutationRate = 200;
+int mutationRate = 10;
 int bestVariation = 0;
 color initialColor;
 
 void setup() {
-  size(500,500);
-  MonaLisa = loadImage("../Mona_Lisa_500.jpg");
+  size(200,200);
+  MonaLisa = loadImage("../Mona_Lisa_200.jpg");
   teststartImage = loadImage("../testsquare.png");
   image(MonaLisa, 0,0);
   initialColor = color(255, 255, 255);
@@ -33,7 +33,9 @@ void draw() {
   generation++;
   smallestError = width * height * 255 * 3;
   for (int i = 0; i < populationSize; i++) {
-    variations[i].mutate(mutationRate);
+    if (i != 0) {
+      variations[i].mutate(mutationRate);
+    }
     thisImageError = variations[i].calculateDifference(MonaLisa);
     if (thisImageError < smallestError) {
       smallestError = thisImageError;
