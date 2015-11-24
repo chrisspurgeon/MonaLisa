@@ -6,7 +6,7 @@ PImage MonaLisa;
 PImage teststartImage;
 long thisImageError;
 long smallestError;
-int generation = 0;
+int generation = 0;   // set starting generation
 int mutationRate = 10;
 int bestVariation = 0;
 color initialColor;
