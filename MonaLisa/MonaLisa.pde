@@ -7,7 +7,7 @@ PImage teststartImage;
 long thisImageError;
 long smallestError;
 int generation = 0;
-int mutationRate = 10;
+int mutationRate = 3;
 int bestVariation = 0;
 color initialColor;
 
@@ -18,7 +18,7 @@ void setup() {
   MonaLisa = loadImage("../Mona_Lisa_500.jpg");
   teststartImage = loadImage("../testsquare.png");
 //  image(MonaLisa, 0,0);
-  initialColor = color(255, 255, 255);
+  initialColor = color(0, 0, 0);
  
   variations = new Painting[populationSize];
   
@@ -45,7 +45,7 @@ void draw() {
     }
   }
 
-  println("\n\nGeneration " + generation);
+  println("\n\nGeneration " + generation + " -- Best variation is " + smallestError);
 //  if (generation % 100 == 0) {
     image(variations[bestVariation].img, 0, 0);
 //  }
