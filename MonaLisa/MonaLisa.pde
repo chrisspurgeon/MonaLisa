@@ -10,13 +10,14 @@ int generation = 0;
 int mutationRate = 3;
 int bestVariation = 0;
 color initialColor;
+float percentageAccuracy;
 
 void setup() {
   size(500,500);
   background(255);
   
   MonaLisa = loadImage("../Mona_Lisa_500.jpg");
-  teststartImage = loadImage("../testsquare.png");
+//  teststartImage = loadImage("../testsquare.png");
 //  image(MonaLisa, 0,0);
   initialColor = color(0, 0, 0);
  
@@ -44,11 +45,16 @@ void draw() {
       bestVariation = i;
     }
   }
-
-  println("\n\nGeneration " + generation + " -- Best variation is " + smallestError);
-//  if (generation % 100 == 0) {
+  
+  percentageAccuracy = smallestError / (255 * 255 * 255 * height * width);
+  println("\n\nGeneration " + generation + " -- Best variation is " + smallestError + " (accuracy: " + percentageAccuracy + ")");
+  if (generation % 5 == 0) {
     image(variations[bestVariation].img, 0, 0);
-//  }
+  }
+  if (generation % 100 == 0) {
+    image(variations[bestVariation].img, 0, 0);
+    saveFrame("OUTPUT/ML-#######.png");
+  }
   
   for (int i = 0; i < populationSize; i++) {
    variations[i].img.copy(variations[bestVariation].img, 0, 0, width, height, 0, 0, width, height);
