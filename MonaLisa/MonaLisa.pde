@@ -6,7 +6,7 @@ PImage MonaLisa;
 PImage teststartImage;
 long thisImageError;
 long smallestError;
-int generation = 0;
+int generation = 520401;
 int mutationRate = 3;
 int bestVariation = 0;
 color initialColor;
@@ -17,7 +17,7 @@ void setup() {
   background(255);
   
   MonaLisa = loadImage("../Mona_Lisa_500.jpg");
-//  teststartImage = loadImage("../testsquare.png");
+    teststartImage = loadImage("OUTPUT/ML-0520400.png");
 //  image(MonaLisa, 0,0);
   initialColor = color(0, 0, 0);
  
@@ -26,7 +26,7 @@ void setup() {
   for (int i = 0; i < populationSize; i++) {
     variations[i] = new Painting(width, height, i);
     variations[i].colorImage(initialColor);
-//    variations[i].img.copy(teststartImage, 0, 0, width, height, 0, 0, width, height);
+    variations[i].img.copy(teststartImage, 0, 0, width, height, 0, 0, width, height);
     println("Creating variation #" + i);
   }
 
@@ -53,7 +53,11 @@ void draw() {
   }
   if (generation % 100 == 0) {
     image(variations[bestVariation].img, 0, 0);
-    saveFrame("OUTPUT/ML-#######.png");
+    if (generation < 1000000) {
+      saveFrame("OUTPUT/ML-0" + generation + ".png");
+    } else {
+      saveFrame("OUTPUT/ML-" + generation + ".png");
+    }
   }
   
   for (int i = 0; i < populationSize; i++) {
